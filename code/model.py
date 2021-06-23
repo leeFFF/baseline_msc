@@ -6,7 +6,6 @@ class PointWiseFeedForward(torch.nn.Module):
     def __init__(self, hidden_units, dropout_rate):
 
         super(PointWiseFeedForward, self).__init__()
-        print('this is the model')
 
         self.conv1 = torch.nn.Conv1d(hidden_units, hidden_units, kernel_size=1)
         self.dropout1 = torch.nn.Dropout(p=dropout_rate)
@@ -27,6 +26,7 @@ class PointWiseFeedForward(torch.nn.Module):
 class SASRec(torch.nn.Module):
     def __init__(self, user_num, item_num, args):
         super(SASRec, self).__init__()
+        print('this is the model')
 
         self.user_num = user_num
         self.item_num = item_num
@@ -71,6 +71,8 @@ class SASRec(torch.nn.Module):
         seqs = self.emb_dropout(seqs)
 
         timeline_mask = torch.BoolTensor(log_seqs == 0).to(self.dev)
+        print('timeline_mask:', timeline_mask)
+        
         seqs *= ~timeline_mask.unsqueeze(-1) # broadcast in last dim
 
         tl = seqs.shape[1] # time dim len for enforce causality
