@@ -26,7 +26,7 @@ class PointWiseFeedForward(torch.nn.Module):
 class SASRec(torch.nn.Module):
     def __init__(self, user_num, item_num, args):
         super(SASRec, self).__init__()
-        print('this is the model')
+        # print('this is the model')
 
         self.user_num = user_num
         self.item_num = item_num
@@ -71,7 +71,7 @@ class SASRec(torch.nn.Module):
         seqs = self.emb_dropout(seqs)
 
         timeline_mask = torch.BoolTensor(log_seqs == 0).to(self.dev)
-        print('timeline_mask:', timeline_mask)
+        # print('timeline_mask:', timeline_mask)
         
         seqs *= ~timeline_mask.unsqueeze(-1) # broadcast in last dim
 
